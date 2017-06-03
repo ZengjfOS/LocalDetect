@@ -8,9 +8,11 @@ namespace LocalDetect
 {
     class MACIP
     {
+        public static int LEFT_TIME = 4;
+
         private string mac = "00:11:22:33:44:55";
         private string ip = "127.0.0.1";
-        private int leftTime = 4;
+        private int leftTime = LEFT_TIME;
         private Socket clientSocket = null;
 
         public MACIP(string mac, string ip, int leftTime = 4)
