@@ -110,7 +110,7 @@ namespace LocalDetect
                 udpBroadcastSendThread = new Thread(udpBroadcastSend);
                 udpBroadcastSendThread.Start();
 
-                udpCommunicationThread = new Thread(udpGetMACIPAndSendCheck);
+                udpCommunicationThread = new Thread(udpGetMACIP);
                 udpCommunicationThread.Start();
 
                 Thread refreshLV = new Thread(refreshMacIpListview);
@@ -178,7 +178,7 @@ namespace LocalDetect
             }
         }
 
-        private void udpGetMACIPAndSendCheck()
+        private void udpGetMACIP()
         {
             UdpClient udpServer = new UdpClient(50001);
             udpServer.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
@@ -190,7 +190,10 @@ namespace LocalDetect
                 Byte[] receiveBytes = { };
 
                 if (running == false)
+                {
+                    udpServer.Close();
                     break;
+                }
 
                 // 这里使用超时退出一次，主要是为了解决按下Stop的时候需要退出，需要杀死线程导致的。
                 try { 
