@@ -37,8 +37,7 @@ class LocalDetect(threading.Thread):
             socketClient = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             try:
                 socketClient.sendto(mac.encode(), address)
-            except ValueError:
-                print(ValueError)
+            except:
                 continue
 
 if __name__ == "__main__":
